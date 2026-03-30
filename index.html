@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=375, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Shield Ventures Event</title>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <style>
+    * { box-sizing: border-box; -webkit-font-smoothing: antialiased; margin: 0; padding: 0; }
+
+    :root {
+      --card-bg: #4a8b71;
+      --list-bg: #2b302e;
+      --ribbon-red: #d02046;
+      --panel-blue: #d1e6f5;
+      --btn-green: #79d832;
+      --btn-green-shadow: #5bb31e;
+      --bonus-pink: #eb1e64;
+      --gold: #ffd700;
+    }
+
+    body {
+      background: #000;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      color: white;
+    }
+
+    .screen {
+      width: 375px;
+      min-height: 100vh;
+      background: rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 60px;
+      padding-bottom: 30px;
+      position: relative;
+    }
+
+    /* ===== LOGO ===== */
+    .header-logo {
+      position: absolute;
+      top: -10px;
+      width: 200px;
+      height: 70px;
+      object-fit: contain;
+      z-index: 20;
+    }
+
+    /* ===== GAME CARD ===== */
+    .game-card {
+      width: 95%;
+      background: var(--card-bg);
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 0 20px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      overflow: visible;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: -10px; right: -5px;
+      width: 36px; height: 36px;
+      background: #ff6b00;
+      border: 2px solid white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 30;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .close-btn:hover { transform: scale(1.1) rotate(90deg); }
+
+    .info-btn {
+      position: absolute;
+      top: 10px; left: 10px;
+      width: 28px; height: 28px;
+      background: #2196f3;
+      border: 2px solid white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 30;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .info-btn:hover { transform: scale(1.1); }
+
+    /* ===== HERO ===== */
+    .hero-section {
+      width: 100%;
+      height: 220px;
+      position: relative;
+      border-radius: 20px 20px 0 0;
+      overflow: hidden;
+      background: linear-gradient(180deg, #87ceeb 0%, #4a8b71 100%);
+    }
+
+    .ribbon-banner {
+      position: absolute;
+      top: 40px; left: 50%;
+      width: 110%;
+      height: 50px;
+      background: var(--ribbon-red);
+      display: flex; align-items: center; justify-content: center;
+      transform: translateX(-50%) rotate(-3deg);
+      box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+      z-index: 10;
+      border: 2px solid #a01332;
+      animation: ribbonPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes ribbonPulse {
+      0%, 100% { box-shadow: 0 5px 10px rgba(0,0,0,0.2); }
+      50% { box-shadow: 0 5px 20px rgba(208,32,70,0.6); }
+    }
+
+    .ribbon-text {
+      font-size: 22px; font-weight: 900;
+      color: white;
+      text-shadow: 0 2px 0 #800e26;
+      text-transform: uppercase;
+      display: flex; align-items: center; gap: 8px;
+    }
+
+    .dice-icon {
+      width: 22px; height: 22px;
+      background: white; border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      color: #333; font-size: 14px; font-weight: 900;
+    }
+
+    .hero-character {
+      width: 100%; height: 100%;
+      display: flex; align-items: flex-end; justify-content: center;
+      padding-bottom: 30px; font-size: 80px;
+      position: relative; z-index: 5;
+    }
+
+    .grand-prize-text {
+      position: absolute;
+      bottom: 10px; width: 100%; text-align: center;
+      font-size: 24px; font-weight: 900;
+      color: var(--gold);
+      text-shadow: 0 3px 0 #b86e00, 0 0 20px rgba(255,215,0,0.5);
+      z-index: 15;
+      letter-spacing: 1px;
+      animation: goldGlow 1.5s ease-in-out infinite;
+    }
+
+    @keyframes goldGlow {
+      0%, 100% { text-shadow: 0 3px 0 #b86e00, 0 0 10px rgba(255,215,0,0.3); }
+      50% { text-shadow: 0 3px 0 #b86e00, 0 0 25px rgba(255,215,0,0.8); }
+    }
+
+    /* ===== REWARD LADDER ===== */
+    .list-container {
+      width: 90%;
+      background: var(--list-bg);
+      border-radius: 16px;
+      padding: 10px 10px 25px;
+      display: flex; flex-direction: column; gap: 8px;
+      position: relative;
+      border: 2px solid #3a403e;
+      margin-top: 10px;
+    }
+
+    .path-line {
+      position: absolute;
+      left: 42px; top: 30px; bottom: 50px;
+      width: 6px;
+      background: linear-gradient(180deg, #ffd700 0%, #555 100%);
+      z-index: 1;
+      border-radius: 3px;
+    }
+
+    /* Progress fill on path */
+    .path-progress {
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%;
+      background: linear-gradient(180deg, #ffd700, #96ed54);
+      border-radius: 3px;
+      transition: height 0.6s ease;
+    }
+
+    .list-row {
+      display: flex; align-items: center;
+      position: relative; z-index: 2;
+      height: 60px;
+      transition: transform 0.2s;
+    }
+    .list-row.grand-row { height: 80px; margin-bottom: 5px; }
+
+    .point-bubble {
+      width: 64px; height: 36px;
+      background: #78909c;
+      border: 2px solid white;
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 13px; color: white;
+      z-index: 3; flex-shrink: 0; margin-right: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+
+    .point-bubble.unlocked {
+      background: linear-gradient(135deg, #96ed54, #5bb31e);
+      box-shadow: 0 2px 10px rgba(150,237,84,0.5);
+    }
+
+    .point-bubble.current {
+      background: linear-gradient(135deg, #ffd700, #ff8c00);
+      animation: currentPulse 1s ease-in-out infinite;
+      box-shadow: 0 0 15px rgba(255,215,0,0.7);
+    }
+
+    @keyframes currentPulse {
+      0%, 100% { box-shadow: 0 0 10px rgba(255,215,0,0.5); }
+      50% { box-shadow: 0 0 20px rgba(255,215,0,0.9); }
+    }
+
+    .reward-panel {
+      flex: 1; height: 100%;
+      background: var(--panel-blue);
+      border: 2px solid white;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: transform 0.15s, filter 0.4s;
+      overflow: hidden;
+    }
+
+    .reward-panel:hover { transform: scale(1.02); }
+    .reward-panel:active { transform: scale(0.98); }
+
+    .reward-panel.locked { filter: grayscale(0.5) brightness(0.8); }
+    .reward-panel.unlocked { background: linear-gradient(135deg, #e8ffd0, #c8f0a0); }
+    .reward-panel.claimed { background: linear-gradient(135deg, #d0f0ff, #a0d8f0); opacity: 0.6; }
+
+    .reward-content {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+
+    .reward-emoji { font-size: 30px; }
+    .grand-emoji { font-size: 46px; }
+
+    .reward-text {
+      font-weight: 900; font-size: 18px;
+      color: #333; -webkit-text-stroke: 1px white;
+    }
+
+    .lock-icon {
+      position: absolute; right: -8px; bottom: -5px;
+      width: 22px; height: 22px;
+      background: var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      border: 2px solid #b8860b;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      transition: opacity 0.4s, transform 0.4s;
+    }
+
+    .lock-icon.hidden { opacity: 0; transform: scale(0); }
+
+    .claimed-badge {
+      position: absolute; top: 4px; right: 4px;
+      background: #22c55e; color: white;
+      font-size: 10px; font-weight: 800;
+      padding: 2px 6px; border-radius: 8px;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .claimed-badge.show { opacity: 1; }
+
+    .mascot {
+      position: absolute; bottom: -18px; left: 10px;
+      font-size: 42px; z-index: 5;
+      animation: mascotBounce 2s ease-in-out infinite;
+    }
+
+    @keyframes mascotBounce {
+      0%, 100% { transform: translateY(0) rotate(-5deg); }
+      50% { transform: translateY(-6px) rotate(5deg); }
+    }
+
+    /* ===== FOOTER ===== */
+    .footer-section {
+      margin-top: 18px; width: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 10px;
+    }
+
+    .vat-text { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+    .unlock-btn {
+      width: 280px; height: 64px;
+      background: linear-gradient(180deg, #96ed54 0%, #76d626 100%);
+      border-radius: 32px; border: none;
+      border-bottom: 6px solid var(--btn-green-shadow);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; font-weight: 900; color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.15s, filter 0.2s;
+    }
+
+    .unlock-btn:hover { filter: brightness(1.1); transform: translateY(-2px); }
+    .unlock-btn:active { border-bottom-width: 2px; transform: translateY(4px); }
+
+    .bonus-tag {
+      position: absolute; right: -28px; top: -12px;
+      background: var(--bonus-pink); color: white;
+      padding: 6px 10px; border-radius: 8px;
+      font-weight: 800; font-size: 11px;
+      border: 2px solid white;
+      transform: rotate(10deg);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      text-align: center; line-height: 1.3;
+      pointer-events: none;
+    }
+
+    .timer-pill {
+      background: rgba(0,0,0,0.6);
+      padding: 7px 16px; border-radius: 20px;
+      display: flex; align-items: center; gap: 7px;
+      font-weight: 700; font-size: 14px;
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+
+    /* ===== PROGRESS BAR ===== */
+    .progress-bar-wrap {
+      width: 90%; margin-top: 10px;
+      background: rgba(0,0,0,0.4);
+      border-radius: 20px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .progress-label {
+      font-size: 11px; color: rgba(255,255,255,0.7);
+      margin-bottom: 5px; display: flex; justify-content: space-between;
+    }
+
+    .progress-track {
+      height: 12px; background: #1a1a1a;
+      border-radius: 6px; overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ffd700, #96ed54);
+      border-radius: 6px;
+      transition: width 0.6s ease;
+      box-shadow: 0 0 8px rgba(150,237,84,0.5);
+    }
+
+    /* ===== MODAL ===== */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.8);
+      display: none; align-items: center; justify-content: center;
+      z-index: 100;
+    }
+    .modal-overlay.show { display: flex; animation: fadeIn 0.2s ease; }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .modal {
+      background: linear-gradient(180deg, #1e3a2f, #0d1f17);
+      border: 2px solid #4a8b71;
+      border-radius: 20px;
+      padding: 28px 24px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.7);
+      animation: popIn 0.3s ease;
+    }
+
+    @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    .modal-emoji { font-size: 56px; margin-bottom: 12px; }
+    .modal h3 { font-size: 22px; font-weight: 900; margin-bottom: 8px; color: var(--gold); }
+    .modal p { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 20px; line-height: 1.5; }
+
+    .modal-actions { display: flex; gap: 10px; justify-content: center; }
+
+    .btn-primary {
+      background: linear-gradient(180deg, #96ed54, #5bb31e);
+      border: none; border-bottom: 4px solid #3a7a0a;
+      border-radius: 12px; padding: 12px 28px;
+      font-weight: 900; font-size: 16px; color: white;
+      cursor: pointer; transition: filter 0.2s;
+    }
+    .btn-primary:hover { filter: brightness(1.1); }
+    .btn-primary:active { border-bottom-width: 1px; transform: translateY(3px); }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px; padding: 12px 20px;
+      font-weight: 700; font-size: 14px; color: white;
+      cursor: pointer;
+    }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed; top: 20px; left: 50%;
+      transform: translateX(-50%) translateY(-80px);
+      background: #22c55e; color: white;
+      padding: 12px 24px; border-radius: 12px;
+      font-weight: 700; font-size: 14px;
+      z-index: 200; pointer-events: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: transform 0.4s ease;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ===== INFO PANEL ===== */
+    .info-panel {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 150;
+      display: none; align-items: center; justify-content: center;
+    }
+    .info-panel.show { display: flex; }
+
+    .info-box {
+      background: #1a2e26;
+      border: 2px solid #4a8b71;
+      border-radius: 20px;
+      padding: 24px;
+      width: 320px;
+      color: white;
+    }
+
+    .info-box h3 { font-size: 18px; margin-bottom: 12px; color: var(--gold); }
+    .info-box p { font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.8); margin-bottom: 10px; }
+
+    .info-close {
+      width: 100%; padding: 12px;
+      background: #4a8b71; border: none; border-radius: 10px;
+      color: white; font-weight: 700; font-size: 14px;
+      cursor: pointer; margin-top: 8px;
+    }
+
+    /* ===== SIMULATE DICE BTN ===== */
+    .simulate-btn {
+      width: 90%;
+      padding: 10px;
+      background: rgba(255,255,255,0.08);
+      border: 1px dashed rgba(255,255,255,0.3);
+      border-radius: 12px;
+      color: rgba(255,255,255,0.6);
+      font-size: 12px; font-weight: 600;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .simulate-btn:hover { background: rgba(255,255,255,0.15); color: white; }
+  </style>
+</head>
+<body>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Info Panel -->
+<div class="info-panel" id="infoPanel">
+  <div class="info-box">
+    <h3>¿Cómo funciona?</h3>
+    <p>Juega y acumula puntos en el evento <strong>Shield Ventures</strong>. A medida que alcances los umbrales marcados en la escalera, desbloquearás recompensas automáticamente.</p>
+    <p>El <strong>Gran Premio</strong> (1,300 pts) incluye 4 packs especiales de pegatinas exclusivos.</p>
+    <p>Al desbloquear el evento por <strong>$9.99</strong> obtienes +200 dados de bonus y acceso a todos los premios.</p>
+    <button class="info-close" onclick="document.getElementById('infoPanel').classList.remove('show')">Entendido</button>
+  </div>
+</div>
+
+<!-- Purchase Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-emoji">🛡️</div>
+    <h3>Desbloquear Evento</h3>
+    <p>Accede a todos los premios del evento Shield Ventures y recibe <strong>+200 dados de bonus</strong> instantáneamente.</p>
+    <div class="modal-actions">
+      <button class="btn-secondary" onclick="closeModal()">Cancelar</button>
+      <button class="btn-primary" onclick="confirmPurchase()">$9.99 AHORA</button>
+    </div>
+  </div>
+</div>
+
+<div class="screen">
+  <!-- Logo -->
+  <div style="position:absolute; top:10px; z-index:20; text-align:center;">
+    <div style="font-size:28px; font-weight:900; color:var(--gold); text-shadow:0 3px 0 #7a5200, 0 0 20px rgba(255,215,0,0.5); letter-spacing:2px;">
+      🛡️ SHIELD VENTURES
+    </div>
+  </div>
+
+  <div class="game-card">
+    <!-- Buttons -->
+    <div class="close-btn" onclick="showToast('Cerrando evento...')">
+      <iconify-icon icon="lucide:x" style="color:white; font-size:20px;"></iconify-icon>
+    </div>
+    <div class="info-btn" onclick="document.getElementById('infoPanel').classList.add('show')">
+      <iconify-icon icon="lucide:info" style="color:white; font-size:16px;"></iconify-icon>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero-section">
+      <div class="ribbon-banner">
+        <div class="ribbon-text">
+          GET UP TO 1,900
+          <div class="dice-icon">⚄</div>
+        </div>
+      </div>
+      <div class="hero-character">🏃‍♂️</div>
+      <div class="grand-prize-text">GRAND PRIZE!</div>
+    </div>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar-wrap">
+      <div class="progress-label">
+        <span>Tu progreso</span>
+        <span id="progress-pts">0 / 1,300 pts</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <!-- Reward Ladder -->
+    <div class="list-container">
+      <div class="path-line">
+        <div class="path-progress" id="pathProgress" style="height:0%"></div>
+      </div>
+
+      <!-- Row 0: Grand Prize (1300 pts) -->
+      <div class="list-row grand-row" id="row-0">
+        <div class="point-bubble locked" id="bubble-0">1,300</div>
+        <div class="reward-panel locked" id="panel-0" onclick="claimReward(0)" data-pts="1300" data-emoji="📦" data-reward="4 Pack Especial">
+          <div style="position:absolute;top:2px;left:50%;transform:translateX(-50%);font-size:10px;color:#888;">GRAN PREMIO</div>
+          <div class="reward-content">
+            <div class="grand-emoji">📦</div>
+            <div class="reward-text" style="font-size:20px;color:#b8860b;">x4</div>
+          </div>
+          <div class="lock-icon" id="lock-0">
+            <iconify-icon icon="lucide:lock" style="color:#b8860b;font-size:12px;"></iconify-icon>
+          </div>
+          <div class="claimed-badge" id="claimed-0">✓ OBTENIDO</div>
+        </div>
+      </div>
+
+      <!-- Row 1: 25 dice (pts: 25) -->
+      <div class="list-row" id="row-1">
+        <div class="point-bubble locked" id="bubble-1">25</div>
+        <div class="reward-panel locked" id="panel-1" onclick="claimReward(1)" data-pts="25" data-emoji="🎲" data-reward="25 Dados">
+          <div class="reward-content">
+            <div class="reward-emoji">🎲</div>
+            <div class="reward-text">25</div>
+          </div>
+          <div class="lock-icon" id="lock-1">
+            <iconify-icon icon="lucide:lock" style="color:#b8860b;font-size:12px;"></iconify-icon>
+          </div>
+          <div class="claimed-badge" id="claimed-1">✓ OBTENIDO</div>
+        </div>
+      </div>
+
+      <!-- Row 2: 20 dice (pts: 15) -->
+      <div class="list-row" id="row-2">
+        <div class="point-bubble locked" id="bubble-2">15</div>
+        <div class="reward-panel locked" id="panel-2" onclick="claimReward(2)" data-pts="15" data-emoji="🎲" data-reward="20 Dados">
+          <div class="reward-content">
+            <div class="reward-emoji">🎲</div>
+            <div class="reward-text">20</div>
+          </div>
+          <div class="lock-icon" id="lock-2">
+            <iconify-icon icon="lucide:lock" style="color:#b8860b;font-size:12px;"></iconify-icon>
+          </div>
+          <div class="claimed-badge" id="claimed-2">✓ OBTENIDO</div>
+        </div>
+      </div>
+
+      <!-- Row 3: 15 dice (pts: 10) -->
+      <div class="list-row" id="row-3">
+        <div class="point-bubble locked" id="bubble-3">10</div>
+        <div class="reward-panel locked" id="panel-3" onclick="claimReward(3)" data-pts="10" data-emoji="🎲" data-reward="15 Dados">
+          <div class="reward-content">
+            <div class="reward-emoji">🎲</div>
+            <div class="reward-text">15</div>
+          </div>
+          <div class="lock-icon" id="lock-3">
+            <iconify-icon icon="lucide:lock" style="color:#b8860b;font-size:12px;"></iconify-icon>
+          </div>
+          <div class="claimed-badge" id="claimed-3">✓ OBTENIDO</div>
+        </div>
+      </div>
+
+      <!-- Row 4: 15 dice (pts: 5) -->
+      <div class="list-row" id="row-4">
+        <div class="point-bubble current" id="bubble-4">5</div>
+        <div class="reward-panel locked" id="panel-4" onclick="claimReward(4)" data-pts="5" data-emoji="🎲" data-reward="15 Dados">
+          <div class="reward-content">
+            <div class="reward-emoji">🎲</div>
+            <div class="reward-text">15</div>
+          </div>
+          <div class="lock-icon" id="lock-4">
+            <iconify-icon icon="lucide:lock" style="color:#b8860b;font-size:12px;"></iconify-icon>
+          </div>
+          <div class="claimed-badge" id="claimed-4">✓ OBTENIDO</div>
+        </div>
+      </div>
+
+      <!-- Mascot -->
+      <div class="mascot" id="mascot">🤖</div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer-section">
+      <div class="vat-text">Prices incl. VAT</div>
+      <div style="position:relative;">
+        <button class="unlock-btn" id="unlockBtn" onclick="openModal()">
+          <span>UNLOCK $9.99</span>
+          <div class="bonus-tag">
+            <iconify-icon icon="lucide:dices" style="font-size:13px;"></iconify-icon><br>
+            +200<br>BONUS
+          </div>
+        </button>
+      </div>
+      <div class="timer-pill">
+        <iconify-icon icon="lucide:clock" style="color:var(--gold);font-size:16px;"></iconify-icon>
+        <span id="timer">4d 12h 00m</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simulate dice roll button -->
+  <button class="simulate-btn" onclick="rollDice()">
+    <iconify-icon icon="lucide:dices" style="font-size:14px;"></iconify-icon>
+    Simular tirada de dados (+5 pts)
+  </button>
+
+</div>
+
+<script>
+  // ===== STATE =====
+  let currentPoints = 0;
+  let eventUnlocked = false;
+  const MAX_PTS = 1300;
+
+  const rewards = [
+    { id: 0, pts: 1300, emoji: '📦', name: '4 Packs Especiales', claimed: false },
+    { id: 1, pts: 25,   emoji: '🎲', name: '25 Dados',           claimed: false },
+    { id: 2, pts: 15,   emoji: '🎲', name: '20 Dados',           claimed: false },
+    { id: 3, pts: 10,   emoji: '🎲', name: '15 Dados',           claimed: false },
+    { id: 4, pts: 5,    emoji: '🎲', name: '15 Dados',           claimed: false },
+  ];
+
+  // ===== TIMER =====
+  let remaining = 4 * 86400 + 12 * 3600; // 4d 12h in seconds
+  function updateTimer() {
+    remaining--;
+    if (remaining <= 0) { document.getElementById('timer').textContent = '¡EXPIRADO!'; return; }
+    const d = Math.floor(remaining / 86400);
+    const h = Math.floor((remaining % 86400) / 3600);
+    const m = Math.floor((remaining % 3600) / 60);
+    const s = remaining % 60;
+    document.getElementById('timer').textContent =
+      d > 0 ? `${d}d ${h}h ${String(m).padStart(2,'0')}m` : `${h}h ${String(m).padStart(2,'0')}m ${String(s).padStart(2,'0')}s`;
+  }
+  setInterval(updateTimer, 1000);
+
+  // ===== TOAST =====
+  const toastEl = document.getElementById('toast');
+  function showToast(msg, color = '#22c55e') {
+    toastEl.textContent = msg;
+    toastEl.style.background = color;
+    toastEl.classList.add('show');
+    setTimeout(() => toastEl.classList.remove('show'), 2200);
+  }
+
+  // ===== MODAL =====
+  function openModal() { document.getElementById('modal').classList.add('show'); }
+  function closeModal() { document.getElementById('modal').classList.remove('show'); }
+
+  function confirmPurchase() {
+    closeModal();
+    eventUnlocked = true;
+    document.getElementById('unlockBtn').innerHTML = '<span>✓ DESBLOQUEADO</span>';
+    document.getElementById('unlockBtn').style.background = 'linear-gradient(180deg, #42a5f5, #1976d2)';
+    document.getElementById('unlockBtn').style.borderBottomColor = '#0d47a1';
+    document.getElementById('unlockBtn').onclick = null;
+    showToast('¡Evento desbloqueado! +200 dados', '#2196f3');
+    updateRewardUI();
+  }
+
+  // ===== DICE ROLL =====
+  function rollDice() {
+    const gain = Math.floor(Math.random() * 10) + 3; // 3–12 pts
+    currentPoints = Math.min(currentPoints + gain, MAX_PTS);
+    showToast(`+${gain} puntos conseguidos! Total: ${currentPoints}`, '#ffa000');
+    updateRewardUI();
+  }
+
+  // ===== REWARD LOGIC =====
+  function updateRewardUI() {
+    const pct = (currentPoints / MAX_PTS) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progress-pts').textContent = `${currentPoints.toLocaleString()} / 1,300 pts`;
+
+    // Path progress (visual — reversed, from bottom to top)
+    const pathPct = Math.min(pct, 100);
+    document.getElementById('pathProgress').style.height = pathPct + '%';
+
+    rewards.forEach((r, i) => {
+      const bubble = document.getElementById(`bubble-${i}`);
+      const panel  = document.getElementById(`panel-${i}`);
+      const lock   = document.getElementById(`lock-${i}`);
+
+      if (r.claimed) {
+        bubble.className = 'point-bubble unlocked';
+        panel.className  = 'reward-panel claimed';
+        lock.className   = 'lock-icon hidden';
+        document.getElementById(`claimed-${i}`).classList.add('show');
+      } else if (currentPoints >= r.pts && eventUnlocked) {
+        bubble.className = 'point-bubble unlocked';
+        panel.className  = 'reward-panel unlocked';
+        lock.className   = 'lock-icon hidden';
+      } else if (currentPoints >= r.pts && !eventUnlocked) {
+        bubble.className = 'point-bubble current';
+        panel.className  = 'reward-panel';
+      } else {
+        bubble.className = 'point-bubble locked';
+        panel.className  = 'reward-panel locked';
+        lock.className   = 'lock-icon';
+      }
+    });
+
+    // Move mascot to current threshold
+    const nextIdx = rewards.slice().reverse().findIndex(r => currentPoints < r.pts);
+    // mascot stays at bottom unless all unlocked
+  }
+
+  function claimReward(id) {
+    const r = rewards[id];
+    if (r.claimed) { showToast('Ya recogiste esta recompensa', '#888'); return; }
+    if (!eventUnlocked) { showToast('Desbloquea el evento primero', '#eb1e64'); openModal(); return; }
+    if (currentPoints < r.pts) {
+      showToast(`Necesitas ${r.pts} puntos. Tienes ${currentPoints}`, '#ff6b00');
+      return;
+    }
+    r.claimed = true;
+    showToast(`¡${r.emoji} ${r.name} reclamado!`, '#22c55e');
+    updateRewardUI();
+  }
+
+  document.getElementById('modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal')) closeModal();
+  });
+
+  // Init
+  updateRewardUI();
+</script>
+</body>
+</html>
